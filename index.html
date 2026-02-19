@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdelrahman Ezzeldean - Flutter Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">AE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" id="themeToggle">
+                <span class="theme-icon">🌙</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">FLUTTER DEVELOPER</div>
+                <h1 class="hero-title">
+                    <span class="line-1">Hi, I'm</span>
+                    <span class="line-2">Abdelrahman</span>
+                    <span class="line-3">Ezzeldean</span>
+                </h1>
+                <p class="hero-description">
+                    Building scalable mobile applications with Clean Architecture,
+                    modern state management, and exceptional user experiences.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">6+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Weeks Mentorship</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2023</div>
+                        <div class="stat-label">Started Journey</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="code-header">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="code-content">
+                        <code>
+                            <span class="keyword">class</span> <span class="class-name">Developer</span> {<br>
+                            &nbsp;&nbsp;<span class="keyword">final</span> name = <span class="string">'Abdelrahman'</span>;<br>
+                            &nbsp;&nbsp;<span class="keyword">final</span> skills = [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Flutter'</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Clean Architecture'</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Bloc/Cubit'</span>,<br>
+                            &nbsp;&nbsp;];<br>
+                            <br>
+                            &nbsp;&nbsp;<span class="keyword">void</span> <span class="function">buildAmazingApps</span>() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Magic happens here ✨</span><br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">WHO I AM</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-lead">
+                        Flutter Developer skilled in building scalable mobile applications using
+                        Clean Architecture, Bloc/Cubit, Firebase, and modern development workflows.
+                    </p>
+                    <p>
+                        I'm passionate about delivering maintainable code, optimizing performance,
+                        and developing real-world applications from scratch. Currently pursuing my
+                        Bachelor's in Information Technology at EELU, graduating in 2025.
+                    </p>
+                    <p>
+                        Through intensive mentorship and hands-on projects, I've gained expertise
+                        in mobile engineering best practices, from architecture patterns to CI/CD
+                        pipelines and performance optimization.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight">
+                            <span class="highlight-icon">📍</span>
+                            <span>Sohag, Egypt</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">🎓</span>
+                            <span>EELU - IT (2021-2025)</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="highlight-icon">💼</span>
+                            <span>Open to Opportunities</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="assets/images/profile_image.jpeg" alt="Abdelrahman Ezzeldean"
+                                class="avatar-image">
+                        </div>
+                        <div class="profile-info">
+                            <h3>Abdelrahman Ezzeldean</h3>
+                            <p>Flutter Developer</p>
+                            <div class="profile-links">
+                                <a href="https://github.com/AbdelrahmanAddel" target="_blank" class="profile-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </a>
+                                <a href="https://linkedin.com/in/abdelrahman-ezzeldean" target="_blank"
+                                    class="profile-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">WHAT I DO</span>
+                <h2 class="section-title">Skills & Expertise</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-icon">💻</div>
+                    <h3>Languages & Core</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Dart</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">🎨</div>
+                    <h3>UI/UX Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Responsive UI</span>
+                        <span class="skill-tag">ScreenUtil</span>
+                        <span class="skill-tag">Custom Widgets</span>
+                        <span class="skill-tag">Animations</span>
+                        <span class="skill-tag">Material Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">🏗️</div>
+                    <h3>Architecture & Patterns</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Clean Architecture</span>
+                        <span class="skill-tag">SOLID Principles</span>
+                        <span class="skill-tag">Design Patterns</span>
+                        <span class="skill-tag">Repository Pattern</span>
+                        <span class="skill-tag">Factory Pattern</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">💉</div>
+                    <h3>Dependency Injection</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GetIt</span>
+                        <span class="skill-tag">get_it</span>
+                        <span class="skill-tag">Injectable</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">⚡</div>
+                    <h3>State Management</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Bloc</span>
+                        <span class="skill-tag">Cubit</span>
+                        <span class="skill-tag">Provider</span>
+                        <span class="skill-tag">flutter_bloc</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">🔌</div>
+                    <h3>Backend & APIs</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">GraphQL</span>
+                        <span class="skill-tag">Dio</span>
+                        <span class="skill-tag">Retrofit</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">💾</div>
+                    <h3>Data & Storage</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Hive</span>
+                        <span class="skill-tag">SharedPreferences</span>
+                        <span class="skill-tag">Cloud Firestore</span>
+                        <span class="skill-tag">Caching</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">🚀</div>
+                    <h3>DevOps & Testing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">CI/CD Pipelines</span>
+                        <span class="skill-tag">Flavors</span>
+                        <span class="skill-tag">Flutter DevTools</span>
+                        <span class="skill-tag">Unit Testing</span>
+                        <span class="skill-tag">Widget Testing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">MY WORK</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Showcasing my top 3 projects from 6+ completed applications</p>
+            </div>
+            <div class="projects-grid">
+                <!-- CoinGecko Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">₿</div>
+                        <a href="https://github.com/AbdelrahmanAddel" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title">CoinGecko - Crypto Tracker</h3>
+                    <p class="project-description">
+                        Team-based crypto market tracking application with real-time data,
+                        portfolio management, and secure payment integration.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Clean Architecture</span>
+                        <span class="tech-tag">Bloc</span>
+                        <span class="tech-tag">CI/CD</span>
+                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">Sentry</span>
+                    </div>
+                    <div class="project-highlights">
+                        <div class="highlight-item">✓ Multi-environment flavors setup</div>
+                        <div class="highlight-item">✓ Automated CI/CD pipelines</div>
+                        <div class="highlight-item">✓ Real-time crash monitoring</div>
+                    </div>
+                </div>
+
+                <!-- SM Store Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🛒</div>
+                        <a href="https://github.com/AbdelrahmanAddel" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title">SM Store - E-commerce</h3>
+                    <p class="project-description">
+                        Full-featured shopping platform with product catalog, cart management,
+                        and seamless checkout experience.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">GraphQL</span>
+                        <span class="tech-tag">Cubit</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">i18n</span>
+                        <span class="tech-tag">Dio</span>
+                    </div>
+                    <div class="project-highlights">
+                        <div class="highlight-item">✓ Complete e-commerce flow</div>
+                        <div class="highlight-item">✓ Arabic/English localization</div>
+                        <div class="highlight-item">✓ Push notifications</div>
+                    </div>
+                </div>
+
+                <!-- iHealth Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🏥</div>
+                        <a href="https://github.com/AbdelrahmanAddel" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title">iHealth - Medical Assistant</h3>
+                    <p class="project-description">
+                        Healthcare consultation app with AI-powered recommendations for
+                        medical conditions and treatment suggestions.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Clean Architecture</span>
+                        <span class="tech-tag">AI Integration</span>
+                        <span class="tech-tag">Firebase Auth</span>
+                        <span class="tech-tag">Cubit</span>
+                    </div>
+                    <div class="project-highlights">
+                        <div class="highlight-item">✓ AI-based recommendations</div>
+                        <div class="highlight-item">✓ Secure authentication</div>
+                        <div class="highlight-item">✓ Adaptive UI layouts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">LET'S CONNECT</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p class="contact-lead">
+                        I'm currently seeking opportunities to contribute to high-impact mobile
+                        teams. Let's build something amazing together!
+                    </p>
+                    <div class="contact-methods">
+                        <a href="mailto:abdelrahmanezzeldean@gmail.com" class="contact-method">
+                            <div class="method-icon">📧</div>
+                            <div class="method-details">
+                                <div class="method-label">Email</div>
+                                <div class="method-value">abdelrahmanezzeldean@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="tel:+201115458569" class="contact-method">
+                            <div class="method-icon">📱</div>
+                            <div class="method-details">
+                                <div class="method-label">Phone</div>
+                                <div class="method-value">+20 111 545 8569</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/AbdelrahmanAddel" target="_blank" class="contact-method">
+                            <div class="method-icon">💻</div>
+                            <div class="method-details">
+                                <div class="method-label">GitHub</div>
+                                <div class="method-value">github.com/AbdelrahmanAddel</div>
+                            </div>
+                        </a>
+                        <a href="https://linkedin.com/in/abdelrahman-ezzeldean" target="_blank" class="contact-method">
+                            <div class="method-icon">💼</div>
+                            <div class="method-details">
+                                <div class="method-label">LinkedIn</div>
+                                <div class="method-value">linkedin.com/in/abdelrahman-ezzeldean</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <div class="quick-contact">
+                        <h3>Quick Message</h3>
+                        <p>Feel free to reach out directly through any of the methods on the left, or download my CV
+                            below.</p>
+                        <a href="#" class="btn btn-primary" id="downloadCV">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-brand">Abdelrahman Ezzeldean</div>
+                    <p>Flutter Developer crafting exceptional mobile experiences</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="https://github.com/AbdelrahmanAddel" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/in/abdelrahman-ezzeldean" target="_blank">LinkedIn</a>
+                        <a
+                            href="/cdn-cgi/l/email-protection#35545751505947545d58545b504f4f50595150545b755258545c591b565a58">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Abdelrahman Ezzeldean. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
