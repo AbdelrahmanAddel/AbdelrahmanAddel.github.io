@@ -1,314 +1,359 @@
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.querySelector('.theme-icon');
-const body = document.body;
+/* =====================================================
+   PORTFOLIO — SCRIPT.JS
+   Professional, clean, well-organized JavaScript
+===================================================== */
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    body.classList.add('light-theme');
-    themeIcon.innerHTML = '☀️';
-}
+'use strict';
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-theme');
+/* ─────────────────────────────────────────────────
+   THEME MANAGEMENT
+───────────────────────────────────────────────── */
+const ThemeManager = (() => {
+    const THEME_KEY = 'portfolio_theme';
+    const body = document.body;
+    const toggle = document.getElementById('themeToggle');
+    const icon = toggle?.querySelector('.theme-icon');
 
-    if (body.classList.contains('light-theme')) {
-        themeIcon.innerHTML = '☀️';
-        localStorage.setItem('theme', 'light');
-    } else {
-        themeIcon.innerHTML = '🌙';
-        localStorage.setItem('theme', 'dark');
-    }
-});
-
-// Smooth Scroll for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-
-        if (target) {
-            const offsetTop = target.offsetTop - 80;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+    const apply = (theme) => {
+        if (theme === 'light') {
+            body.classList.add('light-theme');
+            if (icon) icon.textContent = '☀️';
+        } else {
+            body.classList.remove('light-theme');
+            if (icon) icon.textContent = '🌙';
         }
-    });
-});
+    };
 
-// Navbar Scroll Effect
-let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
+    const init = () => {
+        const saved = localStorage.getItem(THEME_KEY) || 'dark';
+        apply(saved);
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+        toggle?.addEventListener('click', () => {
+            const isLight = body.classList.contains('light-theme');
+            const next = isLight ? 'dark' : 'light';
+            apply(next);
+            localStorage.setItem(THEME_KEY, next);
+        });
+    };
 
-    if (currentScroll <= 0) {
-        navbar.style.transform = 'translateY(0)';
-        return;
-    }
+    return { init };
+})();
 
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        // Scrolling down
-        navbar.style.transform = 'translateY(-100%)';
-    } else {
-        // Scrolling up
-        navbar.style.transform = 'translateY(0)';
-    }
 
-    lastScroll = currentScroll;
-});
+/* ─────────────────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────────────────── */
+const NavManager = (() => {
+    const navbar = document.getElementById('navbar');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-// Intersection Observer for Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    let lastScroll = 0;
+    let ticking = false;
+
+    const updateScrollState = () => {
+        const scrollY = window.scrollY;
+
+        // Add scrolled class for background
+        if (scrollY > 50) {
+            navbar?.classList.add('scrolled');
+        } else {
+            navbar?.classList.remove('scrolled');
+        }
+
+        // Hide/show on scroll direction
+        if (scrollY > lastScroll && scrollY > 200) {
+            navbar?.style && (navbar.style.transform = 'translateY(-100%)');
+        } else {
+            navbar?.style && (navbar.style.transform = 'translateY(0)');
+        }
+
+        lastScroll = scrollY;
+        ticking = false;
+    };
+
+    const updateActiveLink = () => {
+        let current = '';
+        sections.forEach(section => {
+            if (window.scrollY >= section.offsetTop - 120) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    };
+
+    const init = () => {
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateScrollState();
+                    updateActiveLink();
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                const href = anchor.getAttribute('href');
+                if (href === '#') return;
+
+                const target = document.querySelector(href);
+                if (!target) return;
+
+                e.preventDefault();
+                const top = target.offsetTop - 72;
+                window.scrollTo({ top, behavior: 'smooth' });
+
+                // Close mobile menu if open
+                MobileMenu?.close();
+            });
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   MOBILE MENU
+───────────────────────────────────────────────── */
+const MobileMenu = (() => {
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    let isOpen = false;
+
+    const open = () => {
+        isOpen = true;
+        menu?.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        hamburger?.setAttribute('aria-expanded', 'true');
+    };
+
+    const close = () => {
+        isOpen = false;
+        menu?.classList.remove('open');
+        document.body.style.overflow = '';
+        hamburger?.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggle = () => (isOpen ? close() : open());
+
+    const init = () => {
+        hamburger?.addEventListener('click', toggle);
+        menu?.addEventListener('click', e => {
+            if (e.target.tagName === 'A') close();
+        });
+    };
+
+    return { init, close };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   SCROLL REVEAL ANIMATIONS
+───────────────────────────────────────────────── */
+const ScrollReveal = (() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
+    );
+
+    const init = () => {
+        const elements = document.querySelectorAll('.reveal');
+        elements.forEach(el => observer.observe(el));
+
+        // Reveal anything already in the viewport immediately
+        setTimeout(() => {
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('in-view');
+                }
+            });
+        }, 100);
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   PARALLAX BACKGROUND ORBS
+───────────────────────────────────────────────── */
+const ParallaxOrbs = (() => {
+    const orbs = document.querySelectorAll('.orb');
+
+    const init = () => {
+        window.addEventListener('mousemove', e => {
+            const cx = e.clientX / window.innerWidth - 0.5;
+            const cy = e.clientY / window.innerHeight - 0.5;
+
+            orbs.forEach((orb, i) => {
+                const factor = (i + 1) * 18;
+                orb.style.transform = `translate(${cx * factor}px, ${cy * factor}px)`;
+            });
+        }, { passive: true });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   PROJECT CARD 3D TILT
+───────────────────────────────────────────────── */
+const CardTilt = (() => {
+    const init = () => {
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                const rx = ((y - r.height / 2) / r.height) * 8;
+                const ry = ((r.width / 2 - x) / r.width) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   RIPPLE EFFECT
+───────────────────────────────────────────────── */
+const RippleEffect = (() => {
+    const createRipple = (btn, e) => {
+        const r = btn.getBoundingClientRect();
+        const size = Math.max(r.width, r.height);
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        Object.assign(ripple.style, {
+            width: `${size}px`,
+            height: `${size}px`,
+            left: `${e.clientX - r.left - size / 2}px`,
+            top: `${e.clientY - r.top - size / 2}px`,
+        });
+        btn.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+    };
+
+    const init = () => {
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', e => createRipple(btn, e));
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   DOWNLOAD CV
+───────────────────────────────────────────────── */
+const CVDownload = (() => {
+    const init = () => {
+        const btn = document.getElementById('downloadCV');
+        btn?.addEventListener('click', e => {
+            e.preventDefault();
+            const a = document.createElement('a');
+            a.href = 'assets/cv/Abdelrahman_Ezzeldean_Flutter_Developer_Junior.pdf';
+            a.download = 'Abdelrahman_Ezzeldean_Flutter_Developer.pdf';
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => a.remove(), 100);
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   SKILL TAG INTERACTIONS
+───────────────────────────────────────────────── */
+const SkillTags = (() => {
+    const init = () => {
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', () => {
+                tag.style.transform = 'scale(1.08) translateY(-2px)';
+            });
+            tag.addEventListener('mouseleave', () => {
+                tag.style.transform = '';
+            });
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   LOAD ANIMATION
+───────────────────────────────────────────────── */
+const LoadAnim = (() => {
+    const init = () => {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        window.addEventListener('load', () => {
+            requestAnimationFrame(() => {
+                document.body.style.opacity = '1';
+                document.body.classList.add('loaded');
+            });
+        });
+    };
+
+    return { init };
+})();
+
+
+/* ─────────────────────────────────────────────────
+   CONSOLE EASTER EGG
+───────────────────────────────────────────────── */
+const devGreeting = () => {
+    console.log(
+        '%c 👋 Hey Developer! ',
+        'background: linear-gradient(135deg,#0A84FF,#00D4FF); color:white; font-size:18px; font-weight:bold; border-radius:8px; padding:8px 16px;'
+    );
+    console.log('%cInterested in how this was built?', 'font-size:14px; color:#8B9DC3;');
+    console.log('%c→ github.com/AbdelrahmanAddel', 'font-size:13px; color:#0A84FF; font-weight:600;');
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
 
-// Observe all sections and cards
-document.querySelectorAll('section, .skill-category, .project-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+/* ─────────────────────────────────────────────────
+   BOOT — INIT ALL MODULES
+───────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+    LoadAnim.init();
+    ThemeManager.init();
+    NavManager.init();
+    MobileMenu.init();
+    ScrollReveal.init();
+    ParallaxOrbs.init();
+    CardTilt.init();
+    RippleEffect.init();
+    CVDownload.init();
+    SkillTags.init();
+    devGreeting();
 });
-
-// Download CV Button
-const downloadCVBtn = document.getElementById('downloadCV');
-if (downloadCVBtn) {
-    downloadCVBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        // Create download link
-        const link = document.createElement('a');
-        link.href = 'assets/cv/Abdelrahman_Ezzeldean_Flutter_Developer_Junior.pdf';
-        link.download = 'Abdelrahman_Ezzeldean_Flutter_Developer_Junior.pdf';
-        link.target = '_blank';
-
-        // Append to body, click, and remove
-        document.body.appendChild(link);
-        link.click();
-
-        // Clean up
-        setTimeout(() => {
-            document.body.removeChild(link);
-        }, 100);
-    });
-}
-
-// Typing Effect for Hero Title (Optional Enhancement)
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
-
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-
-    type();
-}
-
-// Parallax Effect for Background Orbs
-window.addEventListener('mousemove', (e) => {
-    const orbs = document.querySelectorAll('.gradient-orb');
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-
-    orbs.forEach((orb, index) => {
-        const speed = (index + 1) * 20;
-        const x = (mouseX - 0.5) * speed;
-        const y = (mouseY - 0.5) * speed;
-
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-    });
-});
-
-// Skill Tag Hover Effect
-document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', function () {
-        this.style.transform = 'scale(1.1)';
-    });
-
-    tag.addEventListener('mouseleave', function () {
-        this.style.transform = 'scale(1)';
-    });
-});
-
-// Project Card 3D Tilt Effect
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', function (e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-
-        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-    });
-
-    card.addEventListener('mouseleave', function () {
-        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-    });
-});
-
-// Code Window Animation
-const codeContent = document.querySelector('.code-content code');
-if (codeContent) {
-    const originalHTML = codeContent.innerHTML;
-    codeContent.innerHTML = '';
-
-    setTimeout(() => {
-        let i = 0;
-        const html = originalHTML;
-
-        function revealCode() {
-            if (i < html.length) {
-                codeContent.innerHTML = html.substring(0, i + 1);
-                i++;
-                setTimeout(revealCode, 10);
-            }
-        }
-
-        revealCode();
-    }, 500);
-}
-
-// Active Navigation Link
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-
-        if (window.pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Add ripple effect to buttons
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function (e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-
-        this.appendChild(ripple);
-
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
-
-// Add ripple CSS dynamically
-const style = document.createElement('style');
-style.textContent = `
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(0);
-        animation: ripple-animation 0.6s ease-out;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    .nav-links a.active {
-        color: var(--primary-light);
-    }
-    
-    .nav-links a.active::after {
-        width: 100%;
-    }
-`;
-document.head.appendChild(style);
-
-// Performance: Debounce scroll events
-function debounce(func, wait = 10, immediate = true) {
-    let timeout;
-    return function () {
-        const context = this, args = arguments;
-        const later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
-
-// Console Easter Egg
-console.log('%c👋 Hi there, Developer!', 'font-size: 20px; color: #13B9FD; font-weight: bold;');
-console.log('%cInterested in how this portfolio was built?', 'font-size: 14px; color: #9AA0A6;');
-console.log('%cLet\'s connect! 🚀', 'font-size: 14px; color: #13B9FD;');
-console.log('%cgithub.com/AbdelrahmanAddel', 'font-size: 12px; color: #5F6368;');
-
-// Loading Animation
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-// Add loaded class CSS
-const loadedStyle = document.createElement('style');
-loadedStyle.textContent = `
-    body {
-        opacity: 0;
-        transition: opacity 0.5s ease;
-    }
-    
-    body.loaded {
-        opacity: 1;
-    }
-`;
-document.head.appendChild(loadedStyle);
